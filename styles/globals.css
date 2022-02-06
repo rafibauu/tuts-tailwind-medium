@@ -18,3 +18,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.main-container {
+  @apply px-5 mx-auto flex items-center;
+  max-width: 1200px;
+}
+
+.nav {
+  @apply bg-blue-200 border border-b-black w-full fixed top-0 z-10;
+  height: 75px;
+}
+
+.button {
+  @apply px-5 py-2 bg-black text-white rounded-full;
+}
