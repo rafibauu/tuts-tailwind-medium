@@ -24,11 +24,23 @@ a {
   max-width: 1200px;
 }
 
+.btn-rounded {
+  @apply px-5 py-2 rounded-full;
+}
+
 .nav {
   @apply bg-blue-200 border border-b-black w-full fixed top-0 z-10;
   height: 75px;
 }
 
-.button {
-  @apply px-5 py-2 bg-black text-white rounded-full;
+.header {
+  @apply bg-blue-200;
+  margin-top: 75px;
+}
+
+.header-bg {
+  background-image: url(/section/header.png);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 385px 341px;
 }

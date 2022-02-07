@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -61,7 +62,7 @@ export default function Home() {
               </li>
               <li>
                 <Link href="#" passHref>
-                  <button className="button">
+                  <button className="btn-rounded bg-black text-white">
                     Get Started
                   </button>
                 </Link>
@@ -71,6 +72,23 @@ export default function Home() {
 
         </div>
       </nav>
+
+      <header className="header">
+        <div className="main-container header-bg p-10">
+          <div className="w-3/4 md:w-3/6">
+            <h1 className="hidden sm:inline-block font-serif text-6xl lg:text-7xl mb-2">
+              Medium is a place to write, read, and connect
+            </h1>
+            <h1 className="sm:hidden font-serif text-5xl mb-2">Write, read, and connect</h1>
+            <h2 className="sm:font-semibold text-lg">
+              It's easy and free to post your thinking on any topic and connect with millions of readers.
+            </h2>
+            <button className="btn-rounded border border-black bg-white mt-6">
+              Start Writing
+            </button>
+          </div>
+        </div>
+      </header>
 
     </>
   )
