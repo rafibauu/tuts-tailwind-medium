@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "username": "Tangen Trigo",
+        "group_name": "",
+        "avatar": "/users/01.png",
+        "title": "Cara cepat menjadi developer handal",
+        "date": "Jan 23",
+        "min_read": 15,
+        "star": false
+    },
+    {
+        "id": 2,
+        "username": "Edfel Orien",
+        "group_name": "Gred Tean",
+        "avatar": "/users/02.png",
+        "title": "Memulai untuk membaca tanpa menyentuh buku",
+        "date": "Feb 4",
+        "min_read": 7,
+        "star": false
+    },
+    {
+        "id": 3,
+        "username": "Timi",
+        "group_name": "Look Up Team",
+        "avatar": "/users/03.png",
+        "title": "Cara membuat file dengan menggunakan mouse dan keyboard",
+        "date": "Jan 30",
+        "min_read": 4,
+        "star": true
+    },
+    {
+        "id": 4,
+        "username": "Aor Ulon",
+        "group_name": "Internet Port",
+        "avatar": "/users/04.png",
+        "title": "Menyambungkan dua buah komputer dalam sebuah jaringan internet",
+        "date": "Feb 1",
+        "min_read": 11,
+        "star": false
+    },
+    {
+        "id": 5,
+        "username": "Best Friend",
+        "group_name": "",
+        "avatar": "/users/05.png",
+        "title": "Menemukan teman sejati dalam kegelapan",
+        "date": "Feb 3",
+        "min_read": 6,
+        "star": false
+    },
+    {
+        "id": 6,
+        "username": "Kecap Asin",
+        "group_name": "Makanan Sehat",
+        "avatar": "/users/06.png",
+        "title": "Resep membuat makanan nikmat dan sehat",
+        "date": "Jan 27",
+        "min_read": 4,
+        "star": true
+    }
+]

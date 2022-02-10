@@ -2,6 +2,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import TrendingPosts from '../data/trending.json'
 
 export default function Home() {
   return (
@@ -89,6 +90,87 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      <section className="border border-slate-200">
+        <div className="main-container py-10">
+          <div className="w-full">
+
+            <div className="flex items-center gap-x-2 mb-4">
+              <Image 
+                src="/icons/trending.svg"
+                width="28px"
+                height="28px"
+                alt="Trending icon"
+                layout="fixed"
+              />
+              <h2 className="uppercase font-bold text-sm tracking-wider">
+                TRENDING ON MEDIUM
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {TrendingPosts.map((post, index) => {
+                const trendingIndex = `0${index + 1}`
+                return (
+                  <div key={post.id} className="flex gap-x-4">
+                    <span className="text-slate-300 text-4xl font-extrabold">
+                      {trendingIndex}
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-x-2 mb-2">
+                        <Image 
+                          src={post.avatar}
+                          width="20px"
+                          height="20px"
+                          alt={post.username}
+                          layout="fixed"
+                        />
+                        <h2 className="text-sm tracking-tight">
+                          <span>
+                            <Link href="#" passHref>
+                              <a>{post.username}</a>
+                            </Link>
+                          </span>
+                          {post.group_name && (
+                            <>
+                              <span className="mx-1 text-slate-400">in</span>
+                              <span>
+                                <Link href="#" passHref>
+                                  <a>{post.group_name}</a>
+                                </Link>
+                              </span>
+                            </>
+                          )}
+                        </h2>
+                      </div>
+                      <h3 className="font-bold mb-2 line-clamp-2">{post.title}</h3>
+                      <div className="flex items-center gap-x-1">
+                        <p className="text-sm text-slate-500 flex items-center gap-x-1">
+                          <span>{post.date}</span>
+                          <span className="-mt-2 font-weight">.</span>
+                          <span>{`${post.min_read} min read`}</span>
+                        </p>
+                        {post.star && (
+                          <div>
+                            <Image 
+                              src="/icons/star.svg"
+                              width="15px"
+                              height="15px"
+                              alt="Start icon"
+                              layout="fixed"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
 
     </>
   )
