@@ -4,17 +4,29 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import TrendingPosts from '../data/trending.json'
+import TrendingItem from '../components/Items/Trending'
+import LatestPosts from '../data/latest.json'
+import LatestItem from '../components/Items/Latest'
+import Tags from '../data/discover.json'
+import Menus from '../data/menu.json'
 
 export default function Home() {
   const [trendingPosts, setTrendingPosts] = useState(null)
+  const [latestPosts, setLatestPosts] = useState(null)
 
   const GetTrendingPosts = () => {
     // Get data dari database trending posts
     setTrendingPosts(TrendingPosts)
   }
 
+  const GetLatestsPosts = () => {
+    // Get data dari database trending posts
+    setLatestPosts(LatestPosts)
+  }
+
   useEffect(() => {
     GetTrendingPosts()
+    GetLatestsPosts()
   }, [])
 
   return (
@@ -121,57 +133,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {trendingPosts && trendingPosts.map((trending, index) => {
-                const trendingIndex = `0${index + 1}`
-                const minReadText = `${trending.min_read} min read`
                 return (
-                  <div key={trending.id} className="flex gap-x-4">
-                    <p className="text-4xl font-extrabold text-slate-300">{trendingIndex}</p>
-                    <div>
-                      <div className="flex items-center gap-x-2 mb-4">
-                        <Image 
-                          unoptimized
-                          src={trending.avatar}
-                          width="20px"
-                          height="20px"
-                          alt={trending.username}
-                          layout="fixed"
-                        />
-                        <h4 className="text-sm">
-                          <span>
-                            <Link href="#" passHref>
-                              <a>{trending.username}</a>
-                            </Link>
-                          </span>
-                          {trending.group_name && (
-                            <>
-                              <span className="mx-1 text-slate-400">in</span>
-                              <span>
-                                <Link href="#" passHref>
-                                  <a>{trending.group_name}</a>
-                                </Link>
-                              </span>
-                            </>
-                          )}
-                        </h4>
-                      </div>
-                      <h3 className="font-bold mb-2 line-clamp-2">{trending.title}</h3>
-                      <div className="flex items-center gap-x-1">
-                        <p className="text-slate-500 text-sm">{trending.date}</p>
-                        <span className="text-slate-500 text-sm -mt-2">.</span>
-                        <p className="text-slate-500 text-sm">{minReadText}</p>
-                        {trending.star && (
-                          <Image 
-                            unoptimized
-                            src="/icons/star.svg"
-                            width="15px"
-                            height="15px"
-                            alt="Star icon"
-                            layout="fixed"
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                  <TrendingItem key={trending.id} {...trending} index={index} />
                 )
               })}
             </div>
@@ -180,6 +143,51 @@ export default function Home() {
         </div>
       </section>
 
+      <section>
+        <div className="main-container py-10">
+            
+          <div className="w-full flex flex-col lg:flex-row gap-x-24">
+
+            {/* Latests Posts */}
+            <div className="w-full order-2 lg:order-1 lg:w-2/3">
+              {latestPosts && latestPosts.map((latest) => {
+                return <LatestItem key={latest.id} {...latest} />
+              })}
+            </div>
+
+            {/* Tags */}
+            <div className="w-full order-1 lg:order-2 lg:w-1/3 lg:self-start lg:sticky" style={{ top: '11%' }}>
+              <h2 className="uppercase font-bold text-sm tracking-wider mb-4">
+                DISCOVER MORE OF WHAT MATTERS TO YOU
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {Tags.map((tag) => {
+                  return (
+                    <div key={tag} className="px-3 py-1 text-slate-400 border border-slate-200">
+                      <Link href="#" passHref>
+                        <a>{tag}</a>
+                      </Link>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="mt-8 mb-12 lg:mb-6 border-b border-slate-200"></div>
+              <div className="hidden lg:flex flex-wrap gap-2">
+                {Menus.map((menu) => {
+                  return (
+                    <div key={menu} className="px-2 text-slate-400">
+                      <Link href="#" passHref>
+                        <a>{menu}</a>
+                      </Link>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
     </>
   )
 }
