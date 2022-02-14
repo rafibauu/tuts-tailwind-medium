@@ -29,8 +29,16 @@ a {
 }
 
 .nav {
-  @apply bg-blue-200 border border-b-black w-full fixed top-0 z-10;
+  @apply border border-b-black w-full fixed top-0 z-10 transition-colors;
   height: 75px;
+}
+
+.nav.blue {
+  @apply bg-blue-200;
+}
+
+.nav.white {
+  @apply bg-white;
 }
 
 .header {

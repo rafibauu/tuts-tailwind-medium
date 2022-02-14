@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +14,36 @@ import Menus from '../data/menu.json'
 export default function Home() {
   const [trendingPosts, setTrendingPosts] = useState(null)
   const [latestPosts, setLatestPosts] = useState(null)
+  const navbarRef = useRef(null)
+  const actionButtonRef = useRef(null)
+
+  const ChangeNavbarBackground = (scrollY) => {
+    const navbar = navbarRef.current
+    if (scrollY > 500) {
+      navbar.classList.remove('blue')
+      navbar.classList.add('white')
+    } else {
+      navbar.classList.remove('white')
+      navbar.classList.add('blue')
+    }
+  }
+
+  const ChangeActionButtonBackground = (scrollY) => {
+    const actionButton = actionButtonRef.current
+    if (scrollY > 500) {
+      actionButton.classList.remove('bg-black')
+      actionButton.classList.add('bg-green-700')
+    } else {
+      actionButton.classList.remove('bg-green-700')
+      actionButton.classList.add('bg-black')
+    }
+  }
+
+  const WindowOnScroll = () => {
+    const { scrollY } = window
+    ChangeNavbarBackground(scrollY)
+    ChangeActionButtonBackground(scrollY)
+  }
 
   const GetTrendingPosts = () => {
     // Get data dari database trending posts
@@ -29,18 +60,23 @@ export default function Home() {
     GetLatestsPosts()
   }, [])
 
+  useEffect(() => {
+    window.addEventListener('scroll', WindowOnScroll)
+    return () => window.removeEventListener('scroll', WindowOnScroll)
+  }, [])
+
   return (
     <>
       <Head>
         <title>Medium - Where good ideas find you.</title>
         <meta 
-          name="description" 
+          name="description"
           content="Medium is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." 
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="nav">
+      <nav ref={navbarRef} className="nav blue">
         <div className="main-container gap-x-6 justify-between h-full w-full">
 
           <div>
@@ -87,7 +123,10 @@ export default function Home() {
               </li>
               <li>
                 <Link href="#" passHref>
-                  <button className="btn-rounded bg-black text-white">
+                  <button 
+                    ref={actionButtonRef} 
+                    className="btn-rounded bg-black text-white transition-colors"
+                  >
                     Get Started
                   </button>
                 </Link>
@@ -184,6 +223,7 @@ export default function Home() {
                 })}
               </div>
             </div>
+
           </div>
 
         </div>
