@@ -10,6 +10,7 @@ import LatestPosts from '../data/latest.json'
 import LatestItem from '../components/Items/Latest'
 import Tags from '../data/discover.json'
 import Menus from '../data/menu.json'
+import { RandomDelay } from '../utils/delay'
 
 export default function Home() {
   const [trendingPosts, setTrendingPosts] = useState(null)
@@ -45,13 +46,14 @@ export default function Home() {
     ChangeActionButtonBackground(scrollY)
   }
 
-  const GetTrendingPosts = () => {
+  const GetTrendingPosts = async () => {
     // Get data dari database trending posts
+    await RandomDelay()
     setTrendingPosts(TrendingPosts)
   }
 
-  const GetLatestsPosts = () => {
-    // Get data dari database trending posts
+  const GetLatestsPosts = async () => {
+    await RandomDelay()
     setLatestPosts(LatestPosts)
   }
 
@@ -170,13 +172,8 @@ export default function Home() {
               <h2 className="uppercase font-bold text-sm tracking-wider">TRENDING ON MEDIUM</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {trendingPosts && trendingPosts.map((trending, index) => {
-                return (
-                  <TrendingItem key={trending.id} {...trending} index={index} />
-                )
-              })}
-            </div>
+            <TrendingItem data={trendingPosts} />
+            
           </div>
 
         </div>
@@ -188,11 +185,7 @@ export default function Home() {
           <div className="w-full flex flex-col lg:flex-row gap-x-24">
 
             {/* Latests Posts */}
-            <div className="w-full order-2 lg:order-1 lg:w-2/3">
-              {latestPosts && latestPosts.map((latest) => {
-                return <LatestItem key={latest.id} {...latest} />
-              })}
-            </div>
+            <LatestItem data={latestPosts} />
 
             {/* Tags */}
             <div className="w-full order-1 lg:order-2 lg:w-1/3 lg:self-start lg:sticky" style={{ top: '11%' }}>

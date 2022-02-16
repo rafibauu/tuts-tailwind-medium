@@ -2,7 +2,37 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Latest = (props) => {
+const LatestSkeletonItem = () => {
+  return (
+    <div className="animate-pulse flex gap-x-8 mb-12">
+      <div className="flex-1">
+        <div className="flex items-center gap-x-2 mb-4">
+          <div className="rounded-full bg-slate-200 h-5 w-5"></div>
+          <div className="h-2 w-7/12 bg-slate-200 rounded"></div>
+        </div>
+        <div className="h-5 w-full bg-slate-200 rounded mb-4"></div>
+        <div className="h-3 w-9/12 bg-slate-200 rounded mb-2"></div>
+        <div className="h-3 w-5/12 bg-slate-200 rounded mb-4"></div>
+        <div className="h-2 w-4/12 bg-slate-200 rounded"></div>
+      </div>
+      <div className="bg-slate-200 w-[200px] h-[135px]"></div>
+    </div>
+  )
+}
+
+const LatestSkeleton = () => {
+  return (
+    <div className="w-full order-2 lg:order-1 lg:w-2/3">
+      <LatestSkeletonItem />
+      <LatestSkeletonItem />
+      <LatestSkeletonItem />
+      <LatestSkeletonItem />
+      <LatestSkeletonItem />
+    </div>
+  )
+}
+
+const LatestItem = (props) => {
   const minReadText = `${props.min_read} min read`
   return (
     <div className="flex gap-x-6 mb-16">
@@ -92,6 +122,20 @@ const Latest = (props) => {
           objectFit="cover"
         />
       </div>
+    </div>
+  )
+}
+
+const Latest = ({ data }) => {
+  if (!data) {
+    return <LatestSkeleton />
+  }
+
+  return (
+    <div className="w-full order-2 lg:order-1 lg:w-2/3">
+      {data.map((latest) => {
+        return <LatestItem key={latest.id} {...latest} />
+      })}
     </div>
   )
 }

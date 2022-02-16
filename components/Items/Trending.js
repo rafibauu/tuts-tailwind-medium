@@ -2,7 +2,37 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Trending = (props) => {
+const TrandingSkeletonItem = () => {
+  return (
+    <div className="animate-pulse flex gap-x-4">
+      <div className="bg-slate-200 w-[32px] h-[32px]"></div>
+      <div className="flex-1">
+        <div className="flex items-center gap-x-2 mb-4">
+          <div className="rounded-full bg-slate-200 h-5 w-5"></div>
+          <div className="h-2 w-7/12 bg-slate-200 rounded"></div>
+        </div>
+        <div className="h-5 w-full bg-slate-200 rounded mb-2"></div>
+        <div className="h-5 w-7/12 bg-slate-200 rounded mb-4"></div>
+        <div className="h-2 w-4/12 bg-slate-200 rounded"></div>
+      </div>
+    </div>
+  )
+}
+
+const TrendingSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <TrandingSkeletonItem />
+      <TrandingSkeletonItem />
+      <TrandingSkeletonItem />
+      <TrandingSkeletonItem />
+      <TrandingSkeletonItem />
+      <TrandingSkeletonItem />
+    </div>
+  )
+}
+
+const TrendingItem = (props) => {
     const trendingIndex = `0${props.index + 1}`
     const minReadText = `${props.min_read} min read`
     return (
@@ -55,6 +85,22 @@ const Trending = (props) => {
         </div>
       </div>
     )
+}
+
+const Trending = ({ data }) => {
+  if (!data) {
+    return <TrendingSkeleton />
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {data.map((trending, index) => {
+        return (
+          <TrendingItem key={trending.id} {...trending} index={index} />
+        )
+      })}
+    </div>
+  )
 }
 
 export default Trending
