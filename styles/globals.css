@@ -52,3 +52,23 @@ a {
   background-position: bottom right;
   background-size: 385px 341px;
 }
+
+.latest-thumbnail {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+@media screen(sm) {
+  .latest-thumbnail {
+    width: 150px;
+    height: 100px;
+  }
+}
+
+@media screen(md) {
+  .latest-thumbnail {
+    width: 200px;
+    height: 135px;
+  }
+}

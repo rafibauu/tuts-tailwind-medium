@@ -66,7 +66,11 @@ const TrendingItem = (props) => {
               )}
             </h4>
           </div>
-          <h3 className="font-bold mb-2 line-clamp-2">{props.title}</h3>
+          <Link href="#" passHref>
+            <a>
+              <h3 className="font-bold mb-2 line-clamp-2">{props.title}</h3>
+            </a>
+          </Link>
           <div className="flex items-center gap-x-1">
             <p className="text-slate-500 text-sm">{props.date}</p>
             <span className="text-slate-500 text-sm -mt-2">.</span>
